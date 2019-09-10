@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Layout from "../core/Layout";
-// import { API } from "../config";
+import { API } from "../config";
 
 const Signup = () => {
   const [values, setValues] = useState({
@@ -11,9 +11,35 @@ const Signup = () => {
     success: false
   });
 
+  const { name, email, password } = values;
   // higher order function A function returning a function
   const handeChange = name => event => {
     setValues({ ...values, error: false, [name]: event.target.value });
+  };
+
+  // user = {name, email, password}
+  const signup = user => {
+    console.log(user);
+    fetch(`${API}/signup`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(user)
+    })
+      .then(res => {
+        return console.log(res);
+        // return res.json();
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  const clickSubmit = e => {
+    e.preventDefault();
+    signup({ name, email, password }); // equivalent to name:name, email:email
   };
 
   const signUpForm = () => (
@@ -42,7 +68,9 @@ const Signup = () => {
           className="form-control"
         />
       </div>
-      <button className="btn btn-primary">Submit</button>
+      <button onClick={clickSubmit} className="btn btn-primary">
+        Submit
+      </button>
     </form>
   );
   return (
