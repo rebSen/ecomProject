@@ -38,8 +38,23 @@ const AddProduct = () => {
     formData
   } = values;
 
+  useEffect(() => {
+    setValues({ ...values, formData: new FormData() });
+  }, []);
+
+  const handleChange = name => event => {
+    const value = name === "photo" ? event.target.files[0] : event.target.value;
+    formData.set(name, value);
+    setValues({ ...values, [name]: value });
+  };
+
+  const clickSubmit = event => {
+    //
+  };
+
   const newPostForm = () => (
     <form className="mb-3" onSubmit={clickSubmit}>
+      {/* <form className="mb-3" onSubmit={clickSubmit}> */}
       <h4>Post Photo</h4>
       <div className="form-group">
         <label className="btn btn-secondary">
@@ -51,7 +66,6 @@ const AddProduct = () => {
           />
         </label>
       </div>
-
       <div className="form-group">
         <label className="text-muted">Name</label>
         <input
@@ -61,7 +75,6 @@ const AddProduct = () => {
           value={name}
         />
       </div>
-
       <div className="form-group">
         <label className="text-muted">Description</label>
         <textarea
@@ -70,7 +83,6 @@ const AddProduct = () => {
           value={description}
         />
       </div>
-
       <div className="form-group">
         <label className="text-muted">Price</label>
         <input
@@ -80,14 +92,12 @@ const AddProduct = () => {
           value={price}
         />
       </div>
-
       <div className="form-group">
         <label className="text-muted">Category</label>
         <select onChange={handleChange("category")} className="form-control">
           <option value="5cde522ad8b1ff1b89c36987">Python</option>
         </select>
       </div>
-
       <div className="form-group">
         <label className="text-muted">Shipping</label>
         <select onChange={handleChange("shipping")} className="form-control">
@@ -95,7 +105,6 @@ const AddProduct = () => {
           <option value="1">Yes</option>
         </select>
       </div>
-
       <div className="form-group">
         <label className="text-muted">Quantity</label>
         <input
@@ -104,8 +113,8 @@ const AddProduct = () => {
           className="form-control"
           value={quantity}
         />
-      </div>
-
+      </div>{" "}
+      */}
       <button className="btn btn-outline-primary">Create Product</button>
     </form>
   );
