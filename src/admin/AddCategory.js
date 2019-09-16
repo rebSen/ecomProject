@@ -21,7 +21,14 @@ const AddCategory = () => {
     e.preventDefault();
     setError("");
     setSuccess(false);
-    // api call
+    createCategory(user._id, token, { name }).then(data => {
+      if (data.error) {
+        setError(data.error);
+      } else {
+        setError("");
+        setSuccess(true);
+      }
+    });
   };
 
   const newCategoryForm = () => (
