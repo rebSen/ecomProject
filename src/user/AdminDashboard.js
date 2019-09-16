@@ -33,7 +33,7 @@ const AdminDashboard = () => {
       <div className="card mb-5">
         <h3 className="card-header">Admin Information</h3>
         <ul className="list-group">
-          <li className="list-group-item">{name}</li>
+          <li className="list-group-item">{`${name} ADMIN ROLE`}</li>
           <li className="list-group-item">{email}</li>
           <li className="list-group-item">
             {role === 1 ? "Admin" : "Registred user"}
@@ -45,7 +45,7 @@ const AdminDashboard = () => {
 
   return (
     <Layout
-      title="User Dashboard"
+      title="Admin Dashboard"
       description={`Hello ${name} ! `}
       className="container-fluid"
     >
