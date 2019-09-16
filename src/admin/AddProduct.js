@@ -49,12 +49,29 @@ const AddProduct = () => {
   };
 
   const clickSubmit = event => {
-    //
+    event.preventDefault();
+    setValues({ ...values, error: "", loading: true });
+    createProduct(user._id, token, formData).then(data => {
+      if (data.error) {
+        setValues({ ...values, error: data.error });
+      } else {
+        setValues({
+          ...values,
+          name: "",
+          description: "",
+          photo: "",
+          price: "",
+          quantity: "",
+          loading: false,
+          error: "",
+          createdProduct: data.name
+        });
+      }
+    });
   };
 
   const newPostForm = () => (
     <form className="mb-3" onSubmit={clickSubmit}>
-      {/* <form className="mb-3" onSubmit={clickSubmit}> */}
       <h4>Post Photo</h4>
       <div className="form-group">
         <label className="btn btn-secondary">
@@ -96,6 +113,7 @@ const AddProduct = () => {
         <label className="text-muted">Category</label>
         <select onChange={handleChange("category")} className="form-control">
           <option value="5cde522ad8b1ff1b89c36987">Python</option>
+          <option value="5cde522ad8b1ff1b89c36987">PHP</option>
         </select>
       </div>
       <div className="form-group">
@@ -114,7 +132,6 @@ const AddProduct = () => {
           value={quantity}
         />
       </div>{" "}
-      */}
       <button className="btn btn-outline-primary">Create Product</button>
     </form>
   );
@@ -130,7 +147,6 @@ const AddProduct = () => {
           {showSuccess()} */}
           {newPostForm()}
           {/* {goBack()} */}
-          ...
         </div>
       </div>
     </Layout>
