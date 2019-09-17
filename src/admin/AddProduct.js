@@ -153,6 +153,30 @@ const AddProduct = () => {
     </form>
   );
 
+  const showError = () => (
+    <div
+      className="alert alert-danger"
+      style={{ display: error ? "" : "none" }}
+    >
+      {error}
+    </div>
+  );
+  const showSuccess = () => (
+    <div
+      className="alert alert-success"
+      style={{ display: createdProduct ? "" : "none" }}
+    >
+      <h2>{`${createdProduct} is created`}</h2>
+    </div>
+  );
+
+  const showLoading = () =>
+    loading && (
+      <div className="alert alert-success">
+        <h2>Loading...</h2>
+      </div>
+    );
+
   return (
     <Layout
       title="Add a new Product"
@@ -160,10 +184,10 @@ const AddProduct = () => {
     >
       <div className="row">
         <div className="col-md-8 offset-md-2">
-          {/* {showError()}
-          {showSuccess()} */}
+          {showError()}
+          {showSuccess()}
           {newPostForm()}
-          {/* {goBack()} */}
+          {showLoading()}
         </div>
       </div>
     </Layout>
