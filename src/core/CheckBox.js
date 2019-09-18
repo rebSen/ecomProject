@@ -23,7 +23,7 @@ const CheckBox = ({ categories, handleFilters }) => {
       <input
         onChange={handleToggle(c._id)}
         type="CheckBox"
-        value={checked.indexOf(c._id === -1)}
+        value={checked.indexOf(c._id === -1)} // approfondir
         className="form-check-input"
       />
       <label className="form-check-label">{c.name}</label>

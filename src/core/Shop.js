@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
 import Card from "./Card";
-import { getCategories } from "../admin/apiAdmin";
+import { getCategories, getFilteredProducts } from "./apiCore";
 import CheckBox from "./CheckBox";
-import { prices } from "./fixedPrices";
 import RadioBox from "./RadioBox";
+import { prices } from "./fixedPrices";
 
 const Shop = () => {
   const [myFilters, setMyFilters] = useState({
     filters: { category: [], price: [] }
   });
   const [categories, setCategories] = useState([]);
-  const [error, setError] = useState([]);
+  const [error, setError] = useState(false);
+  const [limit, setLimit] = useState(6);
+  const [skip, setSkip] = useState(0);
+  const [filteredResults, setFilteredResults] = useState(0);
 
   // load categories and set form data
   const init = () => {
@@ -24,12 +27,22 @@ const Shop = () => {
     });
   };
 
+  const loadFilteredResults = newFilters => {
+    getFilteredProducts(skip, limit, newFilters).then(data => {
+      if (data.error) {
+        setError(data.error);
+      } else {
+        setFilteredResults(data);
+      }
+    });
+  };
+
   useEffect(() => {
     init();
+    loadFilteredResults(skip, limit, myFilters.filters);
   }, []);
 
   const handleFilters = (filters, filterBy) => {
-    console.log("SHOP", filters, filterBy);
     const newFilters = { ...myFilters };
     newFilters.filters[filterBy] = filters; // pas clair pour moi
 
@@ -37,6 +50,7 @@ const Shop = () => {
       let priceValues = handlePrice(filters);
       newFilters.filters[filterBy] = priceValues; // pas clair pour moi
     }
+    loadFilteredResults(myFilters.filters);
     setMyFilters(newFilters);
   };
 
@@ -51,7 +65,7 @@ const Shop = () => {
     }
     return array;
   };
-
+  console.log("FilteredResults2", filteredResults);
   return (
     <Layout
       title="Shop Page"
@@ -75,7 +89,7 @@ const Shop = () => {
             />
           </div>
         </div>
-        <div className="col-8">{JSON.stringify(myFilters)}</div>
+        <div className="col-8">{JSON.stringify(filteredResults)}</div>
       </div>
     </Layout>
   );
