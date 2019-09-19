@@ -24,7 +24,6 @@ export const getCategories = () => {
 
 export const getFilteredProducts = (skip, limit, filters = {}) => {
   const data = { limit, skip, filters };
-  console.log("DATA", data);
   return fetch(`${API}/products/by/search`, {
     method: "POST",
     headers: {
