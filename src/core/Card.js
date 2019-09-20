@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ShowImage from "./ShowImage";
 
 const Card = ({ product }) => {
-  console.log(product);
+  //console.log(product);
   return (
     <div className="col-4 mb-3">
       <div className="card">

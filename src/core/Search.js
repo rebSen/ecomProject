@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getCategories } from "./apiCore";
+import { getCategories, list } from "./apiCore";
 import Card from "./Card";
 
 const Search = () => {
@@ -26,8 +26,22 @@ const Search = () => {
   useEffect(() => {
     loadCatgories();
   }, []);
+
   const searchData = () => {
     console.log(search, category);
+    if (search) {
+      list({
+        search: search || undefined,
+        category: category || undefined
+      }).then(response => {
+        if (response.error) {
+          console.log("ICI?", response.error);
+        } else {
+          console.log("RES", response);
+          setData({ ...data, results: response, search: true });
+        }
+      });
+    }
   };
   const searchSubmit = e => {
     e.preventDefault();
@@ -36,6 +50,17 @@ const Search = () => {
 
   const handleChange = name => event => {
     setData({ ...data, [name]: event.target.value, searched: false });
+  };
+
+  const searchedProducts = (results = []) => {
+    return (
+      <div className="row">
+        {results &&
+          results.map((product, i) => {
+            return <Card key={i} product={product} />;
+          })}
+      </div>
+    );
   };
 
   const searchForm = () => (
@@ -69,6 +94,7 @@ const Search = () => {
   return (
     <div className="row">
       <div className="container mb-3"> Search bar {searchForm()}</div>
+      <div className="container -fluid mb-3">{searchedProducts(results)}</div>
     </div>
   );
 };
