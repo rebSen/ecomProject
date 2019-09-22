@@ -53,3 +53,16 @@ export const list = params => {
     })
     .catch(err => console.log(err));
 };
+
+export const read = productId => {
+  let url = `${API}/product/${productId}`;
+  console.log(url);
+  return fetch(url, {
+    method: "GET"
+  })
+    .then(prod => {
+      console.log("RESSS", prod);
+      return prod.json();
+    })
+    .catch(err => console.log(err));
+};
