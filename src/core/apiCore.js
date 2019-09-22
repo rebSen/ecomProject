@@ -66,3 +66,16 @@ export const read = productId => {
     })
     .catch(err => console.log(err));
 };
+
+export const listRelated = productId => {
+  let url = `${API}/product/related/${productId}`;
+  console.log(url);
+  return fetch(url, {
+    method: "GET"
+  })
+    .then(prod => {
+      console.log("RESSS", prod);
+      return prod.json();
+    })
+    .catch(err => console.log(err));
+};
