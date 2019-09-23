@@ -1,10 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, Redirect } from "react-router-dom";
 import ShowImage from "./ShowImage";
 import moment from "moment";
+import { addItem } from "./cartHelpers";
 
 const Card = ({ product, showViewProductButton = true }) => {
+  const [redirect, setRedirect] = useState(false);
   console.log(product.category);
+
   const showViewButton = showViewProductButton => {
     return (
       showViewProductButton && (
@@ -19,12 +22,26 @@ const Card = ({ product, showViewProductButton = true }) => {
 
   const showAddToCardButton = () => {
     return (
-      <button className="btn btn-outline-warning mt-2 mb-2 mr-2">
+      <button
+        onClick={addToCart}
+        className="btn btn-outline-warning mt-2 mb-2 mr-2"
+      >
         Add to Card
       </button>
     );
   };
 
+  const addToCart = () => {
+    addItem(product, () => {
+      setRedirect(true);
+    });
+  };
+
+  const shouldRedirect = redirect => {
+    if (redirect) {
+      return <Redirect to="/cart" />;
+    }
+  };
   const showStock = quantity => {
     return quantity > 0 ? (
       <span className="badge badge-primary badge-pill">{`${quantity} dvd yet in Stock`}</span>
@@ -37,6 +54,7 @@ const Card = ({ product, showViewProductButton = true }) => {
     <div className="card">
       <div className="card-header name">{product.name}</div>
       <div className="card-body">
+        {shouldRedirect(redirect)}
         <ShowImage item={product} url="product" />
         <p className="lead mt-2">
           <p>{product.description.substring(0, 100)}</p>
