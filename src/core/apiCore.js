@@ -68,8 +68,7 @@ export const read = productId => {
 };
 
 export const listRelated = productId => {
-  let url = `${API}/product/related/${productId}`;
-  console.log(url);
+  let url = `${API}/products/related/${productId}`;
   return fetch(url, {
     method: "GET"
   })
