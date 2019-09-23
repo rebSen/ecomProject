@@ -7,7 +7,8 @@ import { addItem } from "./cartHelpers";
 const Card = ({
   product,
   showViewProductButton = true,
-  showAddToCardButton = true
+  showAddToCardButton = true,
+  cartUpdate = false
 }) => {
   const [redirect, setRedirect] = useState(false);
   console.log(product.category);
@@ -48,12 +49,17 @@ const Card = ({
       return <Redirect to="/cart" />;
     }
   };
+
   const showStock = quantity => {
     return quantity > 0 ? (
       <span className="badge badge-primary badge-pill">{`${quantity} dvd yet in Stock`}</span>
     ) : (
       <span className="badge badge-primary badge-pill">Out of Stock</span>
     );
+  };
+
+  const showCartUpdateOptions = cartUpdate => {
+    return cartUpdate && <div> inc/dec</div>;
   };
 
   return (
@@ -77,6 +83,7 @@ const Card = ({
         <br />
         {showViewButton(showViewProductButton)}
         {showAddToCard(showAddToCardButton)}
+        {showCartUpdateOptions(cartUpdate)}
       </div>
     </div>
   );
