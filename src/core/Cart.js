@@ -7,7 +7,7 @@ import Card from "./Card";
 const Cart = () => {
   const [items, setItems] = useState([]);
   useEffect(() => {
-    setItems(getCart);
+    setItems(getCart());
   }, []);
 
   const showItems = items => {
