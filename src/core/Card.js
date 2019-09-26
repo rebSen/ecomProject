@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import ShowImage from "./ShowImage";
 import moment from "moment";
-import { addItem, updateItem } from "./cartHelpers";
+import { addItem, updateItem, removeItem } from "./cartHelpers";
 
 const Card = ({
   product,
   showViewProductButton = true,
   showAddToCardButton = true,
-  cartUpdate = false
+  cartUpdate = false,
+  showRemovedProductButton = false
 }) => {
   const [redirect, setRedirect] = useState(false);
   const [count, setCount] = useState(product.count);
@@ -50,6 +51,19 @@ const Card = ({
     }
   };
 
+  const showRemovedButton = showRemovedProductButton => {
+    return (
+      showRemovedProductButton && (
+        <button
+          onClick={() => removeItem(product._id)}
+          className="btn btn-outline-warning mt-2 mb-2 mr-2"
+        >
+          Remove article
+        </button>
+      )
+    );
+  };
+
   const showStock = quantity => {
     return quantity > 0 ? (
       <span className="badge badge-primary badge-pill">{`${quantity} dvd yet in Stock`}</span>
@@ -57,6 +71,7 @@ const Card = ({
       <span className="badge badge-primary badge-pill">Out of Stock</span>
     );
   };
+
   const handleChange = productId => event => {
     setCount(event.target.value < 1 ? 1 : event.target.value);
     if (event.target.value >= 1) {
@@ -105,6 +120,7 @@ const Card = ({
         <br />
         {showViewButton(showViewProductButton)}
         {showAddToCard(showAddToCardButton)}
+        {showRemovedButton(showRemovedProductButton)}
         {showCartUpdateOptions(cartUpdate)}
       </div>
     </div>
