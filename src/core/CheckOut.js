@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
-import { getProducts, getBraintreeClientToken } from "./apiCore";
+import {
+  getProducts,
+  getBraintreeClientToken,
+  processPayment
+} from "./apiCore";
 import Card from "./Card";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
@@ -48,23 +52,61 @@ const CheckOut = ({ products }) => {
     );
   };
 
+  const buy = () => {
+    // to send the nonce (card type, card numb) to the server
+    // nonce = data.instance.requestPaymentMethod
+    let nonce;
+    let getNonce = data.instance
+      .requestPaymentMethod()
+      .then(data => {
+        // console.log(data);
+        nonce = data.nonce;
+        const paymentData = {
+          paymentMethodNonce: nonce,
+          amount: getTotal(products)
+        };
+
+        processPayment(userId, token, paymentData)
+          .then(response => console.log(response))
+          .catch(error => console.log("error:", error));
+
+        // console.log("send nnxe and total", nonce, getTotal(products));
+      })
+      .catch(error => {
+        console.log("dropIn error:", error);
+        setData({ ...data, error: error.message });
+      });
+  };
+
   const showDropIn = () => (
-    <div>
+    // to erase error message when user typing again > onBlur
+    <div onBlur={() => setData({ ...data, error: "" })}>
       {data.clientToken !== null && products.length > 0 ? (
         <div>
           <DropIn
             options={{ authorization: data.clientToken }}
             onInstance={instance => (data.instance = instance)}
           />
-          <button className="btn btn-success">Pay</button>
+          <button onClick={buy} className="btn btn-success btn-block">
+            Pay
+          </button>
         </div>
       ) : null}
     </div>
   );
 
+  const showError = error => (
+    <div
+      className="alert alert-danger"
+      style={{ display: error ? "" : "none" }}
+    >
+      {error}
+    </div>
+  );
   return (
     <div>
       <h2>total : ${getTotal()}</h2>
+      {showError(data.error)}
       {showCheckout()}
     </div>
   );

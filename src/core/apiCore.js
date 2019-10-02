@@ -89,8 +89,25 @@ export const getBraintreeClientToken = (userId, token) => {
     }
   })
     .then(res => {
-      console.log("RES", res);
+      //console.log("RES", res);
       return res.json();
     })
     .catch(err => console.log("ERROR??", err));
+};
+
+export const processPayment = (userId, token, paymentData) => {
+  return fetch(`${API}/braintree/payment/${userId}`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify(paymentData)
+  })
+    .then(res => {
+      //console.log("RES", res);
+      return res.json();
+    })
+    .catch(err => console.log("ERROR", err));
 };
