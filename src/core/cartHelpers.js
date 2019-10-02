@@ -47,7 +47,7 @@ export const updateItem = (productId, count) => {
       }
     });
     localStorage.setItem("cart", JSON.stringify(cart));
-  }
+  } //FIXME: prévoir un esle ?
 };
 
 export const removeItem = productId => {
