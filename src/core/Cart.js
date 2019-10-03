@@ -9,6 +9,12 @@ const Cart = () => {
   const [items, setItems] = useState([]);
   // const [run, setRun] = useState(false);
 
+  // à l'implementation  du map des articles ajoutés à la cart
+  // pour prémunir d'une boucle
+  // useEffect(() => {
+  //   setItems(getCart());
+  // }, [run]);
+
   useEffect(() => {
     setItems(getCart());
   }, [items]);
