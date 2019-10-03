@@ -7,11 +7,11 @@ import CheckOut from "./CheckOut";
 
 const Cart = () => {
   const [items, setItems] = useState([]);
-  const [run, setRun] = useState(false);
+  // const [run, setRun] = useState(false);
 
   useEffect(() => {
     setItems(getCart());
-  }, [run]);
+  }, [items]);
 
   const showItems = items => {
     return (
@@ -25,8 +25,8 @@ const Cart = () => {
             showAddToCardButton={false}
             cartUpdate={true}
             showRemovedProductButton={true}
-            setRun={setRun}
-            run={run}
+            // setRun={setRun}
+            // run={run}
           />
         ))}
       </div>
