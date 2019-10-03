@@ -13,8 +13,8 @@ import DropIn from "braintree-web-drop-in-react";
 
 const CheckOut = ({ products }) => {
   const [data, setData] = useState({
+    loading: false,
     success: false,
-    loading: null,
     clientToken: null,
     error: "",
     instance: {},
@@ -56,6 +56,7 @@ const CheckOut = ({ products }) => {
   };
 
   const buy = () => {
+    setData({ loading: true });
     // to send the nonce (card type, card numb) to the server
     // nonce = data.instance.requestPaymentMethod
     let nonce;
@@ -82,10 +83,9 @@ const CheckOut = ({ products }) => {
             // empty card
             // create order
           })
-          .catch(
-            error => console.log("error:", error),
-            setData({ loading: false })
-          );
+          .catch(error => {
+            return console.log("error:", error), setData({ loading: false });
+          });
 
         // console.log("send nnxe and total", nonce, getTotal(products));
       })
@@ -102,7 +102,12 @@ const CheckOut = ({ products }) => {
         <div>
           <DropIn
             // threeDSecure is for cvv case  options : threeDSecure: true
-            options={{ authorization: data.clientToken }}
+            options={{
+              authorization: data.clientToken,
+              paypal: {
+                flow: "vault"
+              }
+            }}
             onInstance={instance => (data.instance = instance)}
           />
           <button onClick={buy} className="btn btn-success btn-block">
@@ -130,9 +135,12 @@ const CheckOut = ({ products }) => {
       Thanks your payment was succesfull
     </div>
   );
+
+  const showLoading = loading => loading && <h2>Loading...</h2>;
   return (
     <div>
       <h2>total : ${getTotal()}</h2>
+      {showLoading(data.loading)}
       {showSuccess(data.success)}
       {showError(data.error)}
       {showCheckout()}
