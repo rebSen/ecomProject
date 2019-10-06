@@ -3,7 +3,8 @@ import Layout from "./Layout";
 import {
   getProducts,
   getBraintreeClientToken,
-  processPayment
+  processPayment,
+  createOrder
 } from "./apiCore";
 import { emptyCart } from "./cartHelpers";
 import Card from "./Card";
@@ -39,6 +40,10 @@ const CheckOut = ({ products }) => {
     getToken(userId, token);
   }, []);
 
+  const handleAddress = event => {
+    setData({ ...data, address: event.target.value });
+  };
+
   const getTotal = () => {
     return products.reduce((currentValue, nextValue) => {
       return currentValue + nextValue.count * nextValue.price;
@@ -62,9 +67,8 @@ const CheckOut = ({ products }) => {
     let nonce;
     let getNonce = data.instance
       .requestPaymentMethod()
-      .then(data => {
-        // console.log(data);
-        nonce = data.nonce;
+      .then(res => {
+        nonce = res.nonce;
         const paymentData = {
           paymentMethodNonce: nonce,
           amount: getTotal(products)
@@ -72,22 +76,28 @@ const CheckOut = ({ products }) => {
 
         processPayment(userId, token, paymentData)
           .then(response => {
-            //console.log(response)
+            const createOrderData = {
+              products: products,
+              transaction_id: response.transaction.id,
+              amount: response.transaction.amount,
+              address: data.address
+            };
+
+            createOrder(userId, token, createOrderData);
             setData({ ...data, success: response.success });
 
             emptyCart(() => {
               // Problem with empty car lesson 121 maybe better with order lesson
-              setData({ loading: false, success: true });
+              // setData({ loading: false, success: true });
+              setData({ loading: false });
               console.log("payment success and empty cart");
             });
-            // empty card
-            // create order
           })
           .catch(error => {
             return console.log("error:", error), setData({ loading: false });
           });
 
-        // console.log("send nnxe and total", nonce, getTotal(products));
+        // console.log("send nonce and total", nonce, getTotal(products));
       })
       .catch(error => {
         console.log("dropIn error:", error);
@@ -100,8 +110,16 @@ const CheckOut = ({ products }) => {
     <div onBlur={() => setData({ ...data, error: "" })}>
       {data.clientToken !== null && products.length > 0 ? (
         <div>
+          <div className="gorm-group mb-3">
+            <label className="text-muted">Delivery address</label>
+            <input
+              onChange={handleAddress}
+              className="form-control"
+              value={data.address}
+              placeholder="Type the delivery adress here"
+            />{" "}
+          </div>
           <DropIn
-            // threeDSecure is for cvv case  options : threeDSecure: true
             options={{
               authorization: data.clientToken,
               paypal: {
