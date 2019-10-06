@@ -88,9 +88,9 @@ const CheckOut = ({ products }) => {
 
             emptyCart(() => {
               // Problem with empty car lesson 121 maybe better with order lesson
-              // setData({ loading: false, success: true });
-              setData({ loading: false });
               console.log("payment success and empty cart");
+              setData({ loading: false, success: true });
+              //setData({ loading: false });
             });
           })
           .catch(error => {
