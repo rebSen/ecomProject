@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
-import { listOrders, getStatusValues } from "./apiAdmin";
+import { listAllOrders, getStatusValues, updateOrderStatus } from "./apiAdmin";
 import moment from "moment";
 
 const Orders = () => {
@@ -12,7 +12,7 @@ const Orders = () => {
   const { user, token } = isAuthenticated();
 
   const loadOrders = () => {
-    listOrders(user._id, token).then(data => {
+    listAllOrders(user._id, token).then(data => {
       if (data.error) {
         console.log(data.error);
       } else {
@@ -56,7 +56,13 @@ const Orders = () => {
   );
 
   const handleStatusChange = (e, orderId) => {
-    console.log("updateorderstatus");
+    updateOrderStatus(user._id, token, orderId, e.target.value).then(data => {
+      if (data.error) {
+        console.log("status update failed");
+      } else {
+        loadOrders();
+      }
+    });
   };
 
   const showStatus = o => (
@@ -67,6 +73,7 @@ const Orders = () => {
         onChange={e => handleStatusChange(e, o._id)}
       >
         <option> Update Satus</option>
+
         {statusValues.map((status, index) => (
           <option key={index} value={status}>
             {status}
@@ -84,7 +91,6 @@ const Orders = () => {
         <div className="col-md-8 offset-md-2">
           {showOrdersLength()}
           {orders.map((o, oIndex) => {
-            console.log("OOO", o);
             return (
               <div
                 className="mt-5"

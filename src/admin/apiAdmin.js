@@ -45,7 +45,7 @@ export const getCategories = () => {
     .catch(err => console.log(err));
 };
 
-export const listOrders = (userId, token) => {
+export const listAllOrders = (userId, token) => {
   return fetch(`${API}/order/list/${userId}`, {
     method: "GET",
     headers: {
@@ -54,7 +54,6 @@ export const listOrders = (userId, token) => {
     }
   })
     .then(res => {
-      console.log("RESS", res);
       return res.json();
     })
     .catch(err => console.log(err));
@@ -70,6 +69,23 @@ export const getStatusValues = (userId, token) => {
   })
     .then(res => {
       //console.log("RESS", res);
+      return res.json();
+    })
+    .catch(err => console.log(err));
+};
+
+export const updateOrderStatus = (userId, token, orderId, status) => {
+  return fetch(`${API}/order/${orderId}/status/${userId}`, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({ status, orderId })
+  })
+    .then(res => {
+      console.log("STATUS", res);
       return res.json();
     })
     .catch(err => console.log(err));
