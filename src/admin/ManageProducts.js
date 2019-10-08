@@ -52,7 +52,7 @@ const ManageProducts = () => {
                 <Link to={`/admin/product/update/${p._id}`}>
                   <span className="badge badge-warning badge-pill">Update</span>
                 </Link>
-
+                {/* rajouter une alerte pour confirmer l'éffacement */}
                 <span
                   onClick={() => destroy(p._id)}
                   className="badge badge-danger badge-pill"
