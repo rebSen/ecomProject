@@ -139,7 +139,7 @@ export const updateProduct = (productId, userId, token, product) => {
       Accept: "application/json",
       Authorization: `Bearer ${token}`
     },
-    body: product // no stringify because of the picture
+    body: product // no stringify because of the picture form data
   })
     .then(res => {
       console.log("STATUS", res);
