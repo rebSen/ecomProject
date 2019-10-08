@@ -3,6 +3,7 @@ import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
 import { getPurchaseHistory } from "./apiUser";
+import moment from "moment";
 
 const Dashboard = () => {
   const [history, setHistory] = useState([]);
@@ -63,12 +64,30 @@ const Dashboard = () => {
     );
   };
 
-  const purchaseHistory = () => {
+  const purchaseHistory = history => {
     return (
       <div className="card mb-5">
         <h3 className="card-header">Purchase history</h3>
         <ul className="list-group">
-          <li className="list-group-item">{JSON.stringify(history)}</li>
+          <li className="list-group-item">
+            {history.map((h, i) => {
+              return (
+                <div>
+                  <hr />
+                  {h.products.map((p, i) => {
+                    return (
+                      <div key={i}>
+                        <h6>Product name: {p.name}</h6>
+                        <h6>Product unity price: ${p.price}</h6>
+                        <h6>Product quantity: {p.count}</h6>
+                        {/* <h6>Purchased date: {moment(p.createdAt).fromNow()}</h6> this is not what we want her is the date when product is created*/}
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </li>
         </ul>
       </div>
     );
