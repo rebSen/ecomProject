@@ -12,6 +12,6 @@ app.get("*", function(req, res) {
 
 const PORT = process.env.PORT || 3000;
 
-app.listener(PORT, () => {
+app.listen(PORT, () => {
   console.log(`App is running on port ${PORT}`);
 });
