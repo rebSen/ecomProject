@@ -36,13 +36,13 @@ const Home = () => {
 
   return (
     <Layout
-      title="<^.°> Bienvenue sur le site des Archives !"
+      title="Cinéma Documentaire"
       description="Retrouvez ici tous les films édités par La Famille Digitale et les films produits par Réel Factory."
       className="container-fluid"
     >
       <Search />
       <div className="container">
-        <h2 className="mb-4">New arrivals</h2>
+        <h3 className="mb-4">Nouveautés</h3>
         <div className="row">
           {productsByArrival.map((product, i) => (
             <div key={i} className="col-sm mb-3">
@@ -51,7 +51,7 @@ const Home = () => {
           ))}
         </div>
 
-        <h2 className="mb-4">Best Sellers</h2>
+        <h3 className="mb-4">Meilleures ventes</h3>
         <div className="row">
           {productsBySell.map((product, i) => (
             <div key={i} className="col-sm mb-3">
