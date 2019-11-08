@@ -1,8 +1,10 @@
 @import url("https://fonts.googleapis.com/css?family=Inconsolata|Quicksand|Raleway&display=swap");
 /* border radius bouton arrondis deviennent carrés*/
+
 .main {
   font-family: "Raleway", sans-serif;
 }
+
 .title {
   font-family: "Inconsolata", monospace;
   font-size: 2em;
@@ -19,6 +21,7 @@
 .jumbotron,
 .nav :hover {
   border-radius: 0px;
+  font-family: "Inconsolata", monospace;
 }
 
 /* Cart Badge */
