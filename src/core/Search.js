@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getCategories, list } from "./apiCore";
 import Card from "./Card";
+import "./search.scss";
 
 const Search = () => {
   const [data, setData] = useState({
@@ -81,11 +82,23 @@ const Search = () => {
 
   const searchForm = () => (
     <form onSubmit={searchSubmit}>
-      <span className="input-group-text">
-        <div className="input-group input-group-lg">
-          <div className="input-group-prepend">
-            <select className="btn mr-2" onChange={handleChange("category")}>
-              <option value="all">All</option>
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <input
+              type="search"
+              className="form-control"
+              onChange={handleChange("search")}
+              placeholder="search by name"
+            />
+          </div>
+
+          <div className="col">
+            <select
+              className="custom-select"
+              onChange={handleChange("category")}
+            >
+              <option value="all">Toutes les collections</option>
               {categories.map((cat, i) => (
                 <option key={i} value={cat._id}>
                   {cat.name}
@@ -93,24 +106,21 @@ const Search = () => {
               ))}
             </select>
           </div>
-          <input
-            type="search"
-            className="form-control"
-            onChange={handleChange("search")}
-            placeholder="search by name"
-          />
+
+          <div className="col">
+            <button className="btn btn-outline-secondary">Search</button>
+          </div>
         </div>
-        <div className="btn input-group-append" style={{ border: "none" }}>
-          <button className="input-group-text">Search</button>
-        </div>
-      </span>
+      </div>
     </form>
   );
 
   return (
-    <div className="row">
-      <div className="container mb-3"> Search bar {searchForm()}</div>
-      <div className="container -fluid mb-3">{searchedProducts(results)}</div>
+    <div className="container">
+      <div>{searchForm()}</div>
+      <div>{searchedProducts(results)}</div>
+      {/* <div className="container mb-3">{searchForm()}</div>
+      <div className="container -fluid mb-3">{searchedProducts(results)}</div> */}
     </div>
   );
 };

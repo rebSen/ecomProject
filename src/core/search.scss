@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css?family=Inconsolata|Quicksand|Raleway&display=swap");
+
+.align-search {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.form-control {
+  font-family: "Inconsolata", monospace;
+}
+// .form-control::placeholder {
+// }
+.custom-select {
+  font-family: "Inconsolata", monospace;
+}
+.btn {
+  font-family: "Inconsolata", monospace;
+  border-radius: 3px;
+  color: black;
+}
