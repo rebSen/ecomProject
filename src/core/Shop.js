@@ -12,7 +12,7 @@ const Shop = () => {
   });
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState(false);
-  const [limit, setLimit] = useState(6);
+  const [limit, setLimit] = useState(8);
   const [skip, setSkip] = useState(0);
   const [size, setSize] = useState(0);
   const [filteredResults, setFilteredResults] = useState([]);
@@ -73,7 +73,7 @@ const Shop = () => {
     const newFilters = { ...myFilters };
     newFilters.filters[filterBy] = filters; // pas clair pour moi
 
-    if (filterBy == "price") {
+    if (filterBy === "price") {
       let priceValues = handlePrice(filters);
       newFilters.filters[filterBy] = priceValues; // pas clair pour moi
     }
@@ -98,35 +98,37 @@ const Shop = () => {
       description="Choose what you need in the shop !"
       className="container-fluid"
     >
-      <div className="row">
-        <div className="col-4">
-          <h4>Filter by categories</h4>
-          <ul>
-            <CheckBox
-              categories={categories}
-              handleFilters={filters => handleFilters(filters, "category")}
-            />
-          </ul>
-          <h4>Filter by prices</h4>
-          <div>
-            <RadioBox
-              prices={prices}
-              handleFilters={filters => handleFilters(filters, "price")}
-            />
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-2">
+            <h6>Collections</h6>
+            <ul>
+              <CheckBox
+                categories={categories}
+                handleFilters={filters => handleFilters(filters, "category")}
+              />
+            </ul>
+            <h4>Filter by prices</h4>
+            <div>
+              <RadioBox
+                prices={prices}
+                handleFilters={filters => handleFilters(filters, "price")}
+              />
+            </div>
           </div>
-        </div>
-        <div className="col-8">
-          <h2 className="mb-4">Products</h2>
-          <div className="row">
-            {filteredResults &&
-              filteredResults.map((product, i) => (
-                <div key={i} className="col-4 mb-3">
-                  <Card product={product} />
-                </div>
-              ))}
+          <div className="col-9 offset-1">
+            {/* <h2 className="mb-4">Products</h2> */}
+            <div className="row">
+              {filteredResults &&
+                filteredResults.map((product, i) => (
+                  <div key={i} className="col-3 mb-3">
+                    <Card product={product} />
+                  </div>
+                ))}
+            </div>
+            <hr />
+            {loadMoreButton()}
           </div>
-          <hr />
-          {loadMoreButton()}
         </div>
       </div>
     </Layout>

@@ -8,8 +8,8 @@ const ShowImage = ({ item, url }) => (
       alt={item.name}
       className="mb-3"
       style={{
-        maxHeight: "70%",
-        maxWidth: "70%"
+        maxHeight: "100%",
+        maxWidth: "100%"
       }}
     />
   </div>

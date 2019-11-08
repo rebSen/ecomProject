@@ -1,5 +1,20 @@
+@import url("https://fonts.googleapis.com/css?family=Inconsolata|Quicksand|Raleway&display=swap");
 /* border radius bouton arrondis deviennent carrés*/
-
+.main {
+  font-family: "Raleway", sans-serif;
+}
+.title {
+  font-family: "Inconsolata", monospace;
+  font-size: 2em;
+  /* display: block; */
+  padding: 0.5rem 1rem;
+}
+.nav-link {
+  font-family: "Inconsolata", monospace;
+}
+.card-badge {
+  color: white;
+}
 .btn,
 .jumbotron,
 .nav :hover {
@@ -7,18 +22,18 @@
 }
 
 /* Cart Badge */
-.cart-badge,
+/* .cart-badge,
 .cart-badge:hover {
   border-radius: 50%;
   padding: 2px;
   font-size: 12px;
   font-style: italic;
   background: black;
-}
+} */
 /* Single product page / Product name */
 .name {
-  background: #23a6d5;
-  color: #fff;
+  background: #fff;
+  color: #000000;
   font-weight: bold;
 }
 
@@ -52,24 +67,26 @@
   margin-top: -20px;
 }
 
-@media only screen and (max-width: 600px) {
+/* @media only screen and (max-width: 600px) {
   .jumbotron h2 {
     margin-top: 10px;
   }
-}
+} */
 
 /* jumbotron animation*/
-.jumbotron {
-  width: 30wh;
-  height: 20vh;
-  color: #fff;
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+
+.jumbotron h2 {
+  margin-top: 10px;
+  /* width: 30wh; */
+  /* height: 22vh; */
+  color: #000000;
+  /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
   -webkit-animation: Gradient 15s ease infinite;
   -moz-animation: Gradient 15s ease infinite;
-  animation: Gradient 15s ease infinite;
+  animation: Gradient 15s ease infinite; */
 }
-
+/* 
 @-webkit-keyframes Gradient {
   0% {
     background-position: 0% 50%;
@@ -104,4 +121,4 @@
   100% {
     background-position: 0% 50%;
   }
-}
+} */
