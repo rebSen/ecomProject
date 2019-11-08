@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import ShowImage from "./ShowImage";
 import moment from "moment";
 import { addItem, updateItem, removeItem } from "./cartHelpers";
+import "./card.scss";
 
 const Card = ({
   product,
@@ -20,8 +21,8 @@ const Card = ({
     return (
       showViewProductButton && (
         <Link to={`/product/${product._id}`} className="mr-2">
-          <button className="btn btn-outline-primary mt-2 mb-2">
-            View Product
+          <button className="btn btn-outline-dark mt-2 mb-2">
+            Fiche du film
           </button>
         </Link>
       )
@@ -33,9 +34,9 @@ const Card = ({
       showAddToCardButton && (
         <button
           onClick={addToCart}
-          className="btn btn-outline-warning mt-2 mb-2 mr-2"
+          className="btn btn-outline-secondary mt-2 mb-2 mr-2"
         >
-          Add to Card
+          Ajouter au panier
         </button>
       )
     );
@@ -107,11 +108,13 @@ const Card = ({
 
   return (
     <div className="card">
-      <div className="card-header name">{product.name}</div>
-      <div className="card-body">
+      {/* <div className="card-header name">{product.name}</div> */}
+      <div className="card-body description">
         {shouldRedirect(redirect)}
-        <ShowImage item={product} url="product" />
-        <p className="lead mt-2">
+        <Link to={`/product/${product._id}`}>
+          <ShowImage item={product} url="product" />
+        </Link>
+        {/* <p className="mt-2">
           <p>{product.description.substring(0, 100)}</p>
         </p>
 
@@ -127,7 +130,7 @@ const Card = ({
         {showViewButton(showViewProductButton)}
         {showAddToCard(showAddToCardButton)}
         {showRemovedButton(showRemovedProductButton)}
-        {showCartUpdateOptions(cartUpdate)}
+        {showCartUpdateOptions(cartUpdate)} */}
       </div>
     </div>
   );
