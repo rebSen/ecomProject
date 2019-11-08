@@ -2,18 +2,19 @@ import React, { Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { signout, isAuthenticated } from "../auth";
 import { itemTotal } from "./cartHelpers";
+import Search from "./Search";
 
 const isActive = (history, path) => {
   if (history.location.pathname === path) {
-    return { color: "#ff9900" };
+    return { color: "#70CD6A" };
   } else {
-    return { color: "#ffffff" };
+    return { color: "#000000" };
   }
 };
 
 const Menu = ({ history }) => (
   <div>
-    <ul className="nav nav-tabs bg-primary">
+    <ul className="nav nav-tabs">
       <li className="nav-item">
         <Link className="nav-link" style={isActive(history, "/")} to="/">
           Home
@@ -38,7 +39,7 @@ const Menu = ({ history }) => (
         >
           Cart
           <sup>
-            <small className="cart-badge">{itemTotal()}</small>
+            <small className="badge badge-dark">{itemTotal()}</small>
           </sup>
         </Link>
       </li>
@@ -46,7 +47,7 @@ const Menu = ({ history }) => (
       {isAuthenticated() && isAuthenticated().user.role === 0 && (
         <li className="nav-item">
           <Link
-            className="nav-link"
+            className="main"
             style={isActive(history, "/user/dashboard")}
             to="/user/dashboard"
           >
