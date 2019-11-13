@@ -5,6 +5,7 @@ import { getCategories, getFilteredProducts } from "./apiCore";
 import CheckBox from "./CheckBox";
 import RadioBox from "./RadioBox";
 import { prices } from "./fixedPrices";
+import "./shop.scss";
 
 const Shop = () => {
   const [myFilters, setMyFilters] = useState({
@@ -93,35 +94,45 @@ const Shop = () => {
     return array;
   };
   return (
-    <Layout
-      title="Shop Page"
-      description="Choose what you need in the shop !"
-      className="container-fluid"
-    >
+    <Layout title="La boutique" description="" className="container-fluid">
       <div className="container-fluid">
-        <div className="row">
-          <div className="col-2">
-            <h6>Collections</h6>
+        {/* <div className="row coco">
+          <div className="junior">
+            <h6>jojo</h6>
+          </div>
+          <div className="senior">
+            <h6>jiji</h6>
+          </div>
+        </div> */}
+
+        <div className="coco">
+          {/* col-2 */}
+          <div className="junior">
+            <h6>Filtrer par Collections </h6>
             <ul>
               <CheckBox
                 categories={categories}
                 handleFilters={filters => handleFilters(filters, "category")}
               />
             </ul>
-            <h4>Filter by prices</h4>
-            <div>
-              <RadioBox
-                prices={prices}
-                handleFilters={filters => handleFilters(filters, "price")}
-              />
+            <br />
+            <div className="filter-price">
+              <h6>Filtrer par prix</h6>
+              <div>
+                <RadioBox
+                  prices={prices}
+                  handleFilters={filters => handleFilters(filters, "price")}
+                />
+              </div>
             </div>
           </div>
-          <div className="col-9 offset-1">
+          {/* col-9 offset-1 */}
+          <div className="senior offset-1">
             {/* <h2 className="mb-4">Products</h2> */}
             <div className="row">
               {filteredResults &&
                 filteredResults.map((product, i) => (
-                  <div key={i} className="col-3 mb-3">
+                  <div key={i} className="col-lg-3 col-sm-6 mb-3">
                     <Card product={product} />
                   </div>
                 ))}

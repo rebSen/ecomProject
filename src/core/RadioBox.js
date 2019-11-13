@@ -12,7 +12,8 @@ const RadioBox = ({ prices, handleFilters }) => {
     <div key={i} className="list-unstyled">
       <input
         onChange={handleChange}
-        type="Radio"
+        //type="Radio"
+        type="CheckBox"
         value={`${p._id}`}
         // rajouter name influe sur la selection unique
         name={p}

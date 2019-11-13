@@ -1,0 +1,48 @@
+.coco {
+  display: flex;
+  flex-direction: column;
+  .junior {
+    //background-color: blue;
+    margin-bottom: 20px;
+    padding: 15px;
+    .filter-price {
+      display: none;
+    }
+  }
+  .senior {
+    // background-color: yellow;
+    padding: 5px;
+  }
+}
+// au dessus de 768 :
+@media (min-width: 768px) {
+  .coco {
+    flex-direction: row;
+
+    .junior {
+      //background-color: purple;
+      width: 20%;
+      .filter-price {
+        display: block;
+      }
+    }
+    .senior {
+      // background-color: green;
+      width: 70%;
+    }
+  }
+}
+
+// au dessu de 576
+// @media (min-width: 576px) {
+//   .coco {
+//     flex-direction: row;
+
+//     .junior {
+//       background-color: orange;
+//     }
+//     .senior {
+//       background-color: red;
+//     }
+//   }
+// }
