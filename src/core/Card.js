@@ -107,30 +107,54 @@ const Card = ({
   };
 
   return (
-    <div className="card">
-      {/* <div className="card-header name">{product.name}</div> */}
-      <div className="card-body description">
-        {shouldRedirect(redirect)}
-        <Link to={`/product/${product._id}`}>
-          <ShowImage item={product} url="product" />
-        </Link>
-        {/* <p className="mt-2">
-          <p>{product.description.substring(0, 100)}</p>
-        </p>
+    // <div className="card">
+    //   <div className="card-header name">{product.name}</div>
+    //   <div className="card-body description">
+    //     {shouldRedirect(redirect)}
+    //     <Link to={`/product/${product._id}`}>
+    //       <ShowImage item={product} url="product" />
+    //     </Link>
+    //     <p className="mt-2">
+    //       <p>{product.description.substring(0, 100)}</p>
+    //     </p>
 
-        <p className="black-10">${product.price}</p>
-        <p className="black-9">
-          Category : {product.category && product.category.name}
-        </p>
-        <p className="black-8">
-          Added on {moment(product.createdAt).fromNow()}
-        </p>
-        {showStock(product.quantity)}
-        <br />
-        {showViewButton(showViewProductButton)}
-        {showAddToCard(showAddToCardButton)}
-        {showRemovedButton(showRemovedProductButton)}
-        {showCartUpdateOptions(cartUpdate)} */}
+    //     <p className="black-10">${product.price}</p>
+    //     <p className="black-9">
+    //       Category : {product.category && product.category.name}
+    //     </p>
+    //     <p className="black-8">
+    //       Added on {moment(product.createdAt).fromNow()}
+    //     </p>
+    //     {showStock(product.quantity)}
+    //     <br />
+    //     {showViewButton(showViewProductButton)}
+    //     {showAddToCard(showAddToCardButton)}
+    //     {showRemovedButton(showRemovedProductButton)}
+    //     {showCartUpdateOptions(cartUpdate)}
+    //   </div>
+    // </div>
+
+    // style={{ maxWidth: "540px" }}
+    <div class="card mb-3">
+      <div class="row no-gutters">
+        <div class="col-md-2">
+          <Link to={`/product/${product._id}`}>
+            <ShowImage item={product} url="product" />
+          </Link>
+          {/* <img src="..." class="card-img" alt="..."> */}
+        </div>
+
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{product.name}</h5>
+            <p class="card-text">{product.description.substring(0, 250)}...</p>
+
+            <p> {product.subtitle}</p>
+            {/* <p class="card-text">
+              <small class="text-muted"></small>
+            </p> */}
+          </div>
+        </div>
       </div>
     </div>
   );

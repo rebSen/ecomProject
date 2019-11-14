@@ -9,6 +9,7 @@ const AddProduct = () => {
   const [values, setValues] = useState({
     name: "",
     description: "",
+    subtitle: "",
     price: "",
     categories: [],
     category: "",
@@ -26,6 +27,7 @@ const AddProduct = () => {
   const {
     name,
     description,
+    subtitle,
     price,
     categories,
     category,
@@ -101,6 +103,14 @@ const AddProduct = () => {
           type="text"
           className="form-control"
           value={name}
+        />
+      </div>
+      <div className="form-group">
+        <label className="text-muted">Sous-titre</label>
+        <textarea
+          onChange={handleChange("subtitle")}
+          className="form-control"
+          value={subtitle}
         />
       </div>
       <div className="form-group">
