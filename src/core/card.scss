@@ -1,3 +1,28 @@
-.description {
-  font-size: 0.9em;
+@import "../variable";
+// taille telephone portable
+.radius {
+  border-color: $grey;
+
+  .card-text {
+    font-size: 0.8em;
+    //background-color: blueviolet;
+  }
+}
+
+// à partir de cette taille, ça change : taille tablette et écrans
+@media (min-width: 768px) {
+  .radius {
+    .card-text {
+      font-size: 0.8em;
+      //background-color: yellow;
+    }
+
+    .place-button {
+      margin-top: 50px;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      //position: absolute;
+    }
+  }
 }

@@ -1,0 +1,11 @@
+@import "../variable";
+
+.admin-link {
+  font-family: Raleway, sans-serif;
+  color: black;
+
+  &:hover {
+    color: black;
+    background-color: $green;
+  }
+}

@@ -43,7 +43,12 @@ const Product = props => {
       <div className="row">
         <div className="col-8">
           {product && product.description && (
-            <Card product={product} showViewProductButton={false} />
+            // remplacer par page film
+            <Card
+              product={product}
+              showViewProductButton={false}
+              isSingle={true}
+            />
           )}
         </div>
         <div className="col-4">

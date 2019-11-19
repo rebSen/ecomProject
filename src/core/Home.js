@@ -42,19 +42,20 @@ const Home = () => {
     >
       <Search />
       <div className="container">
-        <h3 className="mb-4">Nouveautés</h3>
         <div className="row">
+          <h3 className="mb-4">::::: Nouveautés</h3>
           {productsByArrival.map((product, i) => (
-            <div key={i} className="col-sm mb-3">
+            // col-sm mb-3
+            <div key={i} className="mb-3">
               <Card product={product} />
             </div>
           ))}
         </div>
 
-        <h3 className="mb-4">Meilleures ventes</h3>
         <div className="row">
+          <h3 className="mb-4">::::: Meilleures ventes</h3>
           {productsBySell.map((product, i) => (
-            <div key={i} className="col-sm mb-3">
+            <div key={i} className="mb-3">
               <Card product={product} />
             </div>
           ))}

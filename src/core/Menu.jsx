@@ -36,7 +36,7 @@ const Menu = ({ history }) => (
         </li>
       </ul>
     </div>
-
+    <hr />
     <div>
       <ul className="nav nav-tabs">
         <li className="nav-item">

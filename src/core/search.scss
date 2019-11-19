@@ -1,21 +1,25 @@
 @import url("https://fonts.googleapis.com/css?family=Inconsolata|Quicksand|Raleway&display=swap");
 
-.align-search {
+.search-bar {
+  //background-color: pink;
   display: flex;
-  flex-direction: row;
   justify-content: flex-end;
-}
 
-.form-control {
-  font-family: "Inconsolata", monospace;
-}
-// .form-control::placeholder {
-// }
-.custom-select {
-  font-family: "Inconsolata", monospace;
-}
-.btn {
-  font-family: "Inconsolata", monospace;
-  border-radius: 3px;
-  color: black;
+  // .align-search {
+  //   display: flex;
+  //   flex-direction: row;
+  //   //justify-content: flex-end;
+  // }
+
+  .form-control {
+    font-family: "Raleway", sans-serif;
+    font-size: 0.9em;
+    width: 30vw;
+  }
+  // .form-control::placeholder {
+  // }
+  .custom-select {
+    font-family: "Raleway", sans-serif;
+    font-size: 0.9em;
+  }
 }
