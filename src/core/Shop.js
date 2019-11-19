@@ -127,12 +127,14 @@ const Shop = () => {
             </div>
           </div>
           {/* col-9 offset-1 */}
-          <div className="senior offset-1">
+          <div className="senior">
             {/* <h2 className="mb-4">Products</h2> */}
             <div className="row">
+              {/* grid */}
               {filteredResults &&
                 filteredResults.map((product, i) => (
-                  <div key={i} className="col-lg-3 col-sm-6 mb-3">
+                  <div key={i}>
+                    {/* // <div key={i} className="col-lg-3 col-sm-6 mb-3"> */}
                     <Card product={product} />
                   </div>
                 ))}

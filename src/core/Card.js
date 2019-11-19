@@ -4,6 +4,23 @@ import ShowImage from "./ShowImage";
 import moment from "moment";
 import { addItem, updateItem, removeItem } from "./cartHelpers";
 import "./card.scss";
+import Button from "../styles/Buttons";
+// import styled from "styled-components";
+import "../_variable.scss";
+
+// const Button = styled.button`
+//   background-color: #ffffff;
+//   font-size: 1em;
+//   margin: 1em;
+//   padding: 0.25em 1em;
+//   border-radius: 3px;
+//   font-size: 0.9em;
+//   border: 1px solid #c9c9c9;
+//   font-family: Raleway, sans-serif;
+//   &:hover {
+//     background: #bababa;
+//   }
+// `;
 
 const Card = ({
   product,
@@ -12,7 +29,8 @@ const Card = ({
   cartUpdate = false,
   showRemovedProductButton = false,
   setRun = f => f, // default value of function
-  run = undefined // default value of undefined
+  run = undefined, // default value of undefined
+  isSingle = false
 }) => {
   const [redirect, setRedirect] = useState(false);
   const [count, setCount] = useState(product.count);
@@ -21,9 +39,7 @@ const Card = ({
     return (
       showViewProductButton && (
         <Link to={`/product/${product._id}`} className="mr-2">
-          <button className="btn btn-outline-dark mt-2 mb-2">
-            Fiche du film
-          </button>
+          <Button>Fiche du film</Button>
         </Link>
       )
     );
@@ -32,12 +48,7 @@ const Card = ({
   const showAddToCard = showAddToCardButton => {
     return (
       showAddToCardButton && (
-        <button
-          onClick={addToCart}
-          className="btn btn-outline-secondary mt-2 mb-2 mr-2"
-        >
-          Ajouter au panier
-        </button>
+        <Button onClick={addToCart}>Ajouter au panier</Button>
       )
     );
   };
@@ -57,15 +68,14 @@ const Card = ({
   const showRemovedButton = showRemovedProductButton => {
     return (
       showRemovedProductButton && (
-        <button
+        <Button
           onClick={() => {
             removeItem(product._id);
             setRun(!run);
           }}
-          className="btn btn-outline-warning mt-2 mb-2 mr-2"
         >
-          Remove article
-        </button>
+          Supprimer l'article
+        </Button>
       )
     );
   };
@@ -107,31 +117,73 @@ const Card = ({
   };
 
   return (
-    <div className="card">
-      {/* <div className="card-header name">{product.name}</div> */}
-      <div className="card-body description">
-        {shouldRedirect(redirect)}
-        <Link to={`/product/${product._id}`}>
-          <ShowImage item={product} url="product" />
-        </Link>
-        {/* <p className="mt-2">
-          <p>{product.description.substring(0, 100)}</p>
-        </p>
+    // <div className="card">
+    //   <div className="card-header name">{product.name}</div>
+    //   <div className="card-body description">
+    //     {shouldRedirect(redirect)}
+    //     <Link to={`/product/${product._id}`}>
+    //       <ShowImage item={product} url="product" />
+    //     </Link>
+    //     <p className="mt-2">
+    //       <p>{product.description.substring(0, 100)}</p>
+    //     </p>
 
-        <p className="black-10">${product.price}</p>
-        <p className="black-9">
-          Category : {product.category && product.category.name}
-        </p>
-        <p className="black-8">
-          Added on {moment(product.createdAt).fromNow()}
-        </p>
-        {showStock(product.quantity)}
-        <br />
-        {showViewButton(showViewProductButton)}
-        {showAddToCard(showAddToCardButton)}
-        {showRemovedButton(showRemovedProductButton)}
-        {showCartUpdateOptions(cartUpdate)} */}
+    //     <p className="black-10">${product.price}</p>
+    //     <p className="black-9">
+    //       Category : {product.category && product.category.name}
+    //     </p>
+    //     <p className="black-8">
+    //       Added on {moment(product.createdAt).fromNow()}
+    //     </p>
+    //     {showStock(product.quantity)}
+    //     <br />
+    //     {showViewButton(showViewProductButton)}
+    //     {showAddToCard(showAddToCardButton)}
+    //     {showRemovedButton(showRemovedProductButton)}
+    //     {showCartUpdateOptions(cartUpdate)}
+    //   </div>
+    // </div>
+
+    // style={{ maxWidth: "540px" }}
+    <div class="card mb-3 radius">
+      {/* <Link
+        to={`/product/${product._id}`}
+        style={{ textDecoration: "none", color: "#282928" }}
+      > */}
+      <div class="row no-gutters">
+        <div className="col-md-2 ">
+          {/* col-lg-3 */}
+          <ShowImage item={product} url="product" />
+        </div>
+        {/* <img src="..." class="card-img" alt="..."> */}
+        {/* </div> */}
+
+        <div class="col-md-10 ">
+          {/* col-lg-9 */}
+          <div class="card-body">
+            {shouldRedirect(redirect)}
+            <h5 class="card-title">{product.name}</h5>
+            <p class="card-text">
+              <medium class="text-muted">{product.subtitle}</medium>
+            </p>
+
+            <p class="card-text">
+              {isSingle
+                ? product.description
+                : product.description.substring(0, 250)}
+              ...
+            </p>
+
+            <div className="row place-button">
+              <div>{showViewButton(showViewProductButton)}</div>
+              <div>{showAddToCard(showAddToCardButton)}</div>
+              <div>{showRemovedButton(showRemovedProductButton)}</div>
+              {/* <div>{showCartUpdateOptions(cartUpdate)}</div> */}
+            </div>
+          </div>
+        </div>
       </div>
+      {/* </Link> */}
     </div>
   );
 };

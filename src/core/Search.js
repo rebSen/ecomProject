@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getCategories, list } from "./apiCore";
 import Card from "./Card";
 import "./search.scss";
+import styled from "styled-components";
 
 const Search = () => {
   const [data, setData] = useState({
@@ -11,6 +12,20 @@ const Search = () => {
     results: [],
     searched: false
   });
+
+  const Button = styled.button`
+    background-color: #ffffff;
+    font-size: 1em;
+    padding: 0.44em 1em;
+    border-radius: 3px;
+    font-size: 0.9em;
+    border: 1px solid #c9c9c9;
+    font-family: Raleway, sans-serif;
+    margin-right: -30px;
+    &:hover {
+      background: #bababa;
+    }
+  `;
 
   const { categories, category, search, results, searched } = data;
 
@@ -89,26 +104,27 @@ const Search = () => {
               type="search"
               className="form-control"
               onChange={handleChange("search")}
-              placeholder="search by name"
+              placeholder="recherche par titre - précis pour le moment !"
             />
           </div>
 
-          <div className="col">
+          {/* <div className="col-5">
             <select
               className="custom-select"
               onChange={handleChange("category")}
             >
-              <option value="all">Toutes les collections</option>
+              <option value="all">Collections</option>
               {categories.map((cat, i) => (
                 <option key={i} value={cat._id}>
                   {cat.name}
                 </option>
               ))}
             </select>
-          </div>
+          </div> */}
 
           <div className="col">
-            <button className="btn btn-outline-secondary">Search</button>
+            {/* <button className="btn btn-outline-secondary">Search</button> */}
+            <Button>Search</Button>
           </div>
         </div>
       </div>
@@ -116,7 +132,7 @@ const Search = () => {
   );
 
   return (
-    <div className="container">
+    <div className="container search-bar">
       <div>{searchForm()}</div>
       <div>{searchedProducts(results)}</div>
       {/* <div className="container mb-3">{searchForm()}</div>

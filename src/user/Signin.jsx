@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import Layout from "../core/Layout";
 import { signin, authenticate, isAuthenticated } from "../auth";
+import Button from "../styles/Buttons";
 
 const Signin = () => {
   const [values, setValues] = useState({
@@ -23,8 +24,8 @@ const Signin = () => {
     event.preventDefault();
     setValues({ ...values, error: false, loading: true });
     signin({ email, password }).then(data => {
-      if (data.error) {
-        setValues({ ...values, error: data.error, loading: false });
+      if (data.err) {
+        setValues({ ...values, error: data.err, loading: false });
       } else {
         authenticate(data, () => {
           setValues({
@@ -57,9 +58,10 @@ const Signin = () => {
           value={password}
         />
       </div>
-      <button onClick={clickSubmit} className="btn btn-primary">
+
+      <Button fond={true} onClick={clickSubmit}>
         Submit
-      </button>
+      </Button>
     </form>
   );
 

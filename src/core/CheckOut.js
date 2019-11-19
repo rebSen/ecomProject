@@ -128,7 +128,14 @@ const CheckOut = ({ products }) => {
             }}
             onInstance={instance => (data.instance = instance)}
           />
-          <button onClick={buy} className="btn btn-success btn-block">
+          <button
+            onClick={buy}
+            className="btn btn-success btn-block"
+            style={{
+              backgroundColor: "#58FF6E",
+              borderColor: "#58FF6E"
+            }}
+          >
             Pay
           </button>
         </div>
@@ -157,7 +164,7 @@ const CheckOut = ({ products }) => {
   const showLoading = loading => loading && <h2>Loading...</h2>;
   return (
     <div>
-      <h2>total : ${getTotal()}</h2>
+      <h2>Total : ${getTotal()}</h2>
       {showLoading(data.loading)}
       {showSuccess(data.success)}
       {showError(data.error)}

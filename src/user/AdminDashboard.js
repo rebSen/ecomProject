@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
+import "./admin.scss";
 
 const AdminDashboard = () => {
   const {
@@ -11,26 +12,26 @@ const AdminDashboard = () => {
   const adminlinks = () => {
     return (
       <div className="card">
-        <h4 className="card-header">Admin Links</h4>
+        <h4 className="card-header black-6">Gérer la boutique</h4>
         <ul className="list-group">
           <li className="list-group-item">
-            <Link className="nav-link" to="/create/category">
-              Create category
+            <Link className="nav-link admin-link" to="/create/product">
+              Enregistrer un nouveau film
             </Link>
           </li>
           <li className="list-group-item">
-            <Link className="nav-link" to="/create/product">
-              Create product
+            <Link className="nav-link admin-link" to="/admin/orders">
+              Voir les commandes
             </Link>
           </li>
           <li className="list-group-item">
-            <Link className="nav-link" to="/admin/orders">
-              View Orders
+            <Link className="nav-link admin-link" to="/admin/products">
+              Gérer les articles
             </Link>
           </li>
           <li className="list-group-item">
-            <Link className="nav-link" to="/admin/products">
-              Manage Products
+            <Link className="nav-link admin-link" to="/create/category">
+              Créer une Catégorie
             </Link>
           </li>
         </ul>
@@ -40,13 +41,13 @@ const AdminDashboard = () => {
 
   const adminInfos = () => {
     return (
-      <div className="card mb-5">
-        <h3 className="card-header">Admin Information</h3>
+      <div className="card">
+        <h4 className="card-header black-6">Infos Utilisateur</h4>
         <ul className="list-group">
-          <li className="list-group-item">{`${name} ADMIN ROLE`}</li>
-          <li className="list-group-item">{email}</li>
+          <li className="list-group-item">{`Identifiant : ${name}`}</li>
+          <li className="list-group-item">{`Email : ${email}`}</li>
           <li className="list-group-item">
-            {role === 1 ? "Admin" : "Registred user"}
+            Role : {role === 1 ? "Administrateur" : "Utilisateur enregistré"}
           </li>
         </ul>
       </div>
@@ -60,8 +61,10 @@ const AdminDashboard = () => {
       className="container-fluid"
     >
       <div className="row">
-        <div className="col-3">{adminlinks()}</div>
-        <div className="col-9">{adminInfos()}</div>
+        <div className="col-md-8 offset-md-2 mb-3">{adminlinks()}</div>
+      </div>
+      <div className="row">
+        <div className="col-md-8 offset-md-2 ">{adminInfos()}</div>
       </div>
     </Layout>
   );
