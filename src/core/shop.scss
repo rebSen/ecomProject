@@ -1,7 +1,7 @@
-.coco {
+.shop-main {
   display: flex;
   flex-direction: column;
-  .junior {
+  .shop-menu {
     //background-color: blue;
     margin-bottom: 20px;
     padding: 15px;
@@ -9,24 +9,24 @@
       display: none;
     }
   }
-  .senior {
+  .shop-cards {
     // background-color: yellow;
     padding: 5px;
   }
 }
 // au dessus de 768 :
 @media (min-width: 768px) {
-  .coco {
+  .shop-main {
     flex-direction: row;
 
-    .junior {
+    .shop-menu {
       //background-color: purple;
       width: 20%;
       .filter-price {
         display: block;
       }
     }
-    .senior {
+    .shop-cards {
       // background-color: green;
       margin-left: 5%;
       width: 70%;

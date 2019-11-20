@@ -96,18 +96,8 @@ const Shop = () => {
   return (
     <Layout title="La boutique" description="" className="container-fluid">
       <div className="container-fluid">
-        {/* <div className="row coco">
-          <div className="junior">
-            <h6>jojo</h6>
-          </div>
-          <div className="senior">
-            <h6>jiji</h6>
-          </div>
-        </div> */}
-
-        <div className="coco">
-          {/* col-2 */}
-          <div className="junior">
+        <div className="shop-main">
+          <div className="shop-menu">
             <h6>Filtrer par Collections </h6>
             <ul>
               <CheckBox
@@ -127,7 +117,7 @@ const Shop = () => {
             </div>
           </div>
           {/* col-9 offset-1 */}
-          <div className="senior">
+          <div className="shop-cards">
             {/* <h2 className="mb-4">Products</h2> */}
             <div className="row">
               {/* grid */}
