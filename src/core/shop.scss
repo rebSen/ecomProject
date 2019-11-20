@@ -1,49 +1,17 @@
-.shop-main {
-  display: flex;
-  flex-direction: column;
-  .shop-menu {
-    //background-color: blue;
-    margin-bottom: 20px;
-    padding: 15px;
-    .filter-price {
-      display: none;
-    }
-  }
-  .shop-cards {
-    // background-color: yellow;
-    padding: 5px;
+.shop-menu {
+  font-size: 0.7rem;
+  .filter-price {
+    display: none;
   }
 }
+
 // au dessus de 768 :
 @media (min-width: 768px) {
-  .shop-main {
-    flex-direction: row;
-
-    .shop-menu {
-      //background-color: purple;
-      width: 20%;
-      .filter-price {
-        display: block;
-      }
-    }
-    .shop-cards {
-      // background-color: green;
-      margin-left: 5%;
-      width: 70%;
+  .shop-menu {
+    font-size: 0.8rem;
+    // padding-left: 2%;
+    .filter-price {
+      display: block;
     }
   }
 }
-
-// au dessu de 576
-// @media (min-width: 576px) {
-//   .coco {
-//     flex-direction: row;
-
-//     .junior {
-//       background-color: orange;
-//     }
-//     .senior {
-//       background-color: red;
-//     }
-//   }
-// }

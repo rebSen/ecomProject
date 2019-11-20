@@ -6,6 +6,7 @@ import CheckBox from "./CheckBox";
 import RadioBox from "./RadioBox";
 import { prices } from "./fixedPrices";
 import "./shop.scss";
+import Button from "../styles/Buttons";
 
 const Shop = () => {
   const [myFilters, setMyFilters] = useState({
@@ -57,11 +58,7 @@ const Shop = () => {
   const loadMoreButton = () => {
     return (
       size > 0 &&
-      size >= limit && (
-        <button onClick={loadMore} className="btn btn-warning mb-5">
-          Load More !
-        </button>
-      )
+      size >= limit && <Button onClick={loadMore}>Load More !</Button>
     );
   };
 
@@ -96,9 +93,9 @@ const Shop = () => {
   return (
     <Layout title="La boutique" description="" className="container-fluid">
       <div className="container-fluid">
-        <div className="shop-main">
-          <div className="shop-menu">
-            <h6>Filtrer par Collections </h6>
+        <div className="row">
+          <div className="col-sm-3 col-lg-2 offset-lg-1 shop-menu">
+            <p>Filtrer par Collections </p>
             <ul>
               <CheckBox
                 categories={categories}
@@ -107,7 +104,7 @@ const Shop = () => {
             </ul>
             <br />
             <div className="filter-price">
-              <h6>Filtrer par prix</h6>
+              <p>Filtrer par prix</p>
               <div>
                 <RadioBox
                   prices={prices}
@@ -116,21 +113,19 @@ const Shop = () => {
               </div>
             </div>
           </div>
-          {/* col-9 offset-1 */}
-          <div className="shop-cards">
-            {/* <h2 className="mb-4">Products</h2> */}
-            <div className="row">
-              {/* grid */}
+
+          <div className="col-sm-8 offset-1 offset-lg-0">
+            <div>
               {filteredResults &&
                 filteredResults.map((product, i) => (
                   <div key={i}>
-                    {/* // <div key={i} className="col-lg-3 col-sm-6 mb-3"> */}
                     <Card product={product} />
                   </div>
                 ))}
             </div>
+
             <hr />
-            {loadMoreButton()}
+            <div style={{ float: "right" }}>{loadMoreButton()}</div>
           </div>
         </div>
       </div>
