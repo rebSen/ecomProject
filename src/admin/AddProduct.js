@@ -8,8 +8,9 @@ const AddProduct = () => {
   const { user, token } = isAuthenticated();
   const [values, setValues] = useState({
     name: "",
-    description: "",
     subtitle: "",
+    description: "",
+    vimeo: "",
     price: "",
     categories: [],
     category: "",
@@ -26,8 +27,9 @@ const AddProduct = () => {
   // destructure state will make use of it more easy
   const {
     name,
-    description,
     subtitle,
+    description,
+    vimeo,
     price,
     categories,
     category,
@@ -71,7 +73,9 @@ const AddProduct = () => {
         setValues({
           ...values,
           name: "",
+          subtitle: "",
           description: "",
+          vimeo: "",
           photo: "",
           price: "",
           quantity: "",
@@ -111,6 +115,14 @@ const AddProduct = () => {
           onChange={handleChange("subtitle")}
           className="form-control"
           value={subtitle}
+        />
+      </div>
+      <div className="form-group">
+        <label className="text-muted">Lien vimeo</label>
+        <input
+          onChange={handleChange("vimeo")}
+          className="form-control"
+          value={vimeo}
         />
       </div>
       <div className="form-group">
