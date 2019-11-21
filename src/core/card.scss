@@ -3,6 +3,13 @@
 .radius {
   border-color: $grey;
 
+  .video {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    padding-top: 25;
+    height: 0;
+  }
+
   .card-text {
     font-size: 0.8em;
     //background-color: blueviolet;
@@ -12,6 +19,17 @@
 // à partir de cette taille, ça change : taille tablette et écrans
 @media (min-width: 768px) {
   .radius {
+    // .test {
+    //   display: none;
+    //   //clss sur la photo des produits relatifs
+    // }
+    .video {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 */
+      padding-top: 25;
+      height: 0;
+    }
+
     .card-text {
       font-size: 0.8em;
       //background-color: yellow;

@@ -30,7 +30,8 @@ const Card = ({
   showRemovedProductButton = false,
   setRun = f => f, // default value of function
   run = undefined, // default value of undefined
-  isSingle = false
+  isSingle = false,
+  isRelated = false
 }) => {
   const [redirect, setRedirect] = useState(false);
   const [count, setCount] = useState(product.count);
@@ -151,14 +152,14 @@ const Card = ({
         style={{ textDecoration: "none", color: "#282928" }}
       > */}
       <div class="row no-gutters">
-        <div className="col-md-2 ">
-          {/* col-lg-3 */}
+        <div className={isRelated ? "test" : "col-md-2"}>
+          {/* TODO:condition si single */}
           <ShowImage item={product} url="product" />
         </div>
         {/* <img src="..." class="card-img" alt="..."> */}
         {/* </div> */}
 
-        <div class="col-md-10 ">
+        <div className={isRelated ? "col-md-12" : "col-md-10 "}>
           {/* col-lg-9 */}
           <div class="card-body">
             {shouldRedirect(redirect)}
@@ -173,6 +174,34 @@ const Card = ({
                 : product.description.substring(0, 250)}
               ...
             </p>
+
+            {product.vimeo && isSingle ? (
+              <div
+                className="video"
+                style={{
+                  position: "relative",
+                  paddingBottom: "56.25%" /* 16:9 */,
+                  paddingTop: 25,
+                  height: 0
+                }}
+              >
+                <iframe
+                  src={product.vimeo}
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%"
+                  }}
+                  frameborder="0"
+                  allow="autoplay; fullscreen"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            ) : (
+              <div></div>
+            )}
 
             <div className="row place-button">
               <div>{showViewButton(showViewProductButton)}</div>
