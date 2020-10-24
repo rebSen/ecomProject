@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
-import Card from "./Card";
+import CardMain from "./Card";
 import { getCategories, getFilteredProducts } from "./apiCore";
 import CheckBox from "./CheckBox";
 import RadioBox from "./RadioBox";
 import { prices } from "./fixedPrices";
 import "./shop.scss";
 import Button from "../styles/Buttons";
+import { Row, Col } from "reactstrap";
 
 const Shop = () => {
   const [myFilters, setMyFilters] = useState({
-    filters: { category: [], price: [] }
+    filters: { category: [], price: [] },
   });
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState(false);
@@ -21,7 +22,7 @@ const Shop = () => {
 
   // load categories and set form data
   const init = () => {
-    getCategories().then(data => {
+    getCategories().then((data) => {
       if (data.error) {
         setError(data.error);
       } else {
@@ -30,8 +31,8 @@ const Shop = () => {
     });
   };
 
-  const loadFilteredResults = newFilters => {
-    getFilteredProducts(skip, limit, newFilters).then(data => {
+  const loadFilteredResults = (newFilters) => {
+    getFilteredProducts(skip, limit, newFilters).then((data) => {
       if (data.error) {
         setError(data.error);
       } else {
@@ -44,7 +45,7 @@ const Shop = () => {
 
   const loadMore = () => {
     let toSkip = skip + limit;
-    getFilteredProducts(toSkip, limit, myFilters.filters).then(data => {
+    getFilteredProducts(toSkip, limit, myFilters.filters).then((data) => {
       if (data.error) {
         setError(data.error);
       } else {
@@ -79,7 +80,7 @@ const Shop = () => {
     setMyFilters(newFilters);
   };
 
-  const handlePrice = value => {
+  const handlePrice = (value) => {
     const data = prices;
     let array = [];
 
