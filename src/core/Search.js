@@ -10,7 +10,7 @@ const Search = () => {
     category: "",
     search: "",
     results: [],
-    searched: false
+    searched: false,
   });
 
   const Button = styled.button`
@@ -30,7 +30,7 @@ const Search = () => {
   const { categories, category, search, results, searched } = data;
 
   const loadCategories = () => {
-    getCategories().then(data => {
+    getCategories().then((data) => {
       if (data.error) {
         console.log(data.error);
       } else {
@@ -51,8 +51,8 @@ const Search = () => {
       // list in apicore deconne donc res = error O.o
       list({
         search: search || undefined,
-        category: category
-      }).then(response => {
+        category: category,
+      }).then((response) => {
         if (response.error) {
           console.log("ICI?", response.error);
         } else {
@@ -64,12 +64,12 @@ const Search = () => {
       alert("veuillez remplir la recherche");
     }
   };
-  const searchSubmit = e => {
+  const searchSubmit = (e) => {
     e.preventDefault();
     searchData(); // search data deconne > recherche plante
   };
 
-  const handleChange = name => event => {
+  const handleChange = (name) => (event) => {
     setData({ ...data, [name]: event.target.value, searched: false });
   };
 
@@ -94,6 +94,10 @@ const Search = () => {
       </div>
     );
   };
+
+  //+++++++++++++++++++++
+
+  //+++++++++++++++++++++
 
   const searchForm = () => (
     <form onSubmit={searchSubmit}>
@@ -132,9 +136,10 @@ const Search = () => {
   );
 
   return (
-    <div className="container search-bar">
-      <div>{searchForm()}</div>
+    // <div className="container search-bar">
+    <div className="search-bar">
       <div>{searchedProducts(results)}</div>
+      <div>{searchForm()}</div>
       {/* <div className="container mb-3">{searchForm()}</div>
       <div className="container -fluid mb-3">{searchedProducts(results)}</div> */}
     </div>

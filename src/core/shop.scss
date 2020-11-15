@@ -4,9 +4,14 @@
     display: none;
   }
 }
-
+// .grille {
+//   display: flex;
+//   flex-wrap: wrap;
+//   flex-direction: row;
+//   justify-content: space-between;
+// }
 // au dessus de 768 :
-@media (min-width: 768px) {
+@media (min-width: 770px) {
   .shop-menu {
     font-size: 0.8rem;
     // padding-left: 2%;

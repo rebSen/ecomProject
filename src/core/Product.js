@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
 import { read, listRelated } from "./apiCore";
-import Card from "./Card";
+import CardMain from "./Card";
 import Search from "./Search";
 import "./product.scss";
 
-const Product = props => {
+const Product = (props) => {
   const [product, setProduct] = useState({});
   const [error, setError] = useState(false);
   const [relatedProduct, setRelatedProduct] = useState([]);
 
-  const loadSingleProduct = productId => {
-    read(productId).then(data => {
+  const loadSingleProduct = (productId) => {
+    read(productId).then((data) => {
       if (data.error) {
         setError(data.error);
       } else {
         setProduct(data);
-        listRelated(data._id).then(data => {
+        listRelated(data._id).then((data) => {
           if (data.error) {
             setError(data.error);
           } else {
@@ -43,24 +43,24 @@ const Product = props => {
       <div className="container">
            
         <div className="row">
-          <div className="col-12">
+          <div className="col-16">
             {product && product.description && (
               // remplacer par page film
-              <Card
+              <CardMain
                 product={product}
-                showViewProductButton={false}
-                isSingle={true}
+                //showViewProductButton={false}
+                //isSingle={true} /// vOIR ICI CE QUE ça Change !!
               />
             )}
           </div>
         </div>
         <div className="row">
-          <div className="col-12">
+          <div className="col-16">
             <div className="related-title">De la même collection :</div>
             <div className="related">
               {relatedProduct.map((p, i) => (
-                <div key={i} className="col-md-4 mb-3">
-                  <Card product={p} isRelated={true} />
+                <div key={i} className="col-md-3">
+                  <CardMain product={p} isRelated={true} />
                 </div>
               ))}
             </div>

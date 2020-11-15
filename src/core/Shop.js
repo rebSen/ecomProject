@@ -7,7 +7,7 @@ import RadioBox from "./RadioBox";
 import { prices } from "./fixedPrices";
 import "./shop.scss";
 import Button from "../styles/Buttons";
-import { Row, Col } from "reactstrap";
+import { Row, Col, Container } from "reactstrap";
 
 const Shop = () => {
   const [myFilters, setMyFilters] = useState({
@@ -94,13 +94,13 @@ const Shop = () => {
   return (
     <Layout title="La boutique" description="" className="container-fluid">
       <div className="container-fluid">
-        <div className="row">
-          <div className="col-sm-3 col-lg-2 offset-lg-1 shop-menu">
+        <Row>
+          <div className="col-sm-3 col-lg-2 shop-menu">
             <p>Filtrer par Collections </p>
             <ul>
               <CheckBox
                 categories={categories}
-                handleFilters={filters => handleFilters(filters, "category")}
+                handleFilters={(filters) => handleFilters(filters, "category")}
               />
             </ul>
             <br />
@@ -109,26 +109,38 @@ const Shop = () => {
               <div>
                 <RadioBox
                   prices={prices}
-                  handleFilters={filters => handleFilters(filters, "price")}
+                  handleFilters={(filters) => handleFilters(filters, "price")}
                 />
               </div>
             </div>
           </div>
 
-          <div className="col-sm-8 offset-1 offset-lg-0">
+          <div className="col-sm-7 col-md-10 col-lg-10">
             <div>
-              {filteredResults &&
-                filteredResults.map((product, i) => (
-                  <div key={i}>
-                    <Card product={product} />
-                  </div>
-                ))}
+              <Container>
+                <Row>
+                  {filteredResults &&
+                    filteredResults.map((product, i) => (
+                      // <div className="Row">
+                      // <div
+                      //   className="col-sm-3 offset-1 col-lg-5 shop-menu"
+                      //   style={{ display: "flex" }}
+                      // > md={4}>
+                      // <Col key={i} sm={10} md={6} lg={4}>
+                      <Col key={i} sm={10} md={6} lg={4}>
+                        <CardMain product={product} />
+                      </Col>
+                      // </div>
+                      // </div>
+                    ))}
+                </Row>
+                <Row>
+                  <div style={{ float: "right" }}>{loadMoreButton()}</div>
+                </Row>
+              </Container>
             </div>
-
-            <hr />
-            <div style={{ float: "right" }}>{loadMoreButton()}</div>
           </div>
-        </div>
+        </Row>
       </div>
     </Layout>
   );
