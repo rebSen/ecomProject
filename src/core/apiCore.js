@@ -1,26 +1,26 @@
 import { API } from "../config";
 import queryString from "query-string";
 
-export const getProducts = sortBy => {
+export const getProducts = (sortBy) => {
   return fetch(`${API}/products?sortBy=${sortBy}&order=desc&limit=2`, {
-    method: "GET"
+    method: "GET",
   })
-    .then(res => {
+    .then((res) => {
       return res.json();
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
 // export default getProducts;
 
 export const getCategories = () => {
   return fetch(`${API}/categories`, {
-    method: "GET"
+    method: "GET",
   })
-    .then(res => {
+    .then((res) => {
       return res.json();
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
 export const getFilteredProducts = (skip, limit, filters = {}) => {
@@ -29,54 +29,56 @@ export const getFilteredProducts = (skip, limit, filters = {}) => {
     method: "POST",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   })
-    .then(res => {
+    .then((res) => {
       return res.json();
     })
-    .catch(err => {
+    .catch((err) => {
       console.log("ici", err);
     });
 };
 
-export const list = params => {
+export const list = (params) => {
   const query = queryString.stringify(params);
   let url = `${API}/products/search?${query}`;
+  let regex = /`${params}`/gim;
+  console.log("url >", url, regex.test(params));
   return fetch(url, {
-    method: "GET"
+    method: "GET",
   })
-    .then(response => {
+    .then((response) => {
       console.log("RESSS", response);
       return response.json();
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
-export const read = productId => {
+export const read = (productId) => {
   let url = `${API}/product/${productId}`;
   console.log(url);
   return fetch(url, {
-    method: "GET"
+    method: "GET",
   })
-    .then(prod => {
+    .then((prod) => {
       console.log("RESSS", prod);
       return prod.json();
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
-export const listRelated = productId => {
+export const listRelated = (productId) => {
   let url = `${API}/products/related/${productId}`;
   return fetch(url, {
-    method: "GET"
+    method: "GET",
   })
-    .then(prod => {
+    .then((prod) => {
       console.log("RESSS", prod);
       return prod.json();
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
 export const getBraintreeClientToken = (userId, token) => {
@@ -85,14 +87,14 @@ export const getBraintreeClientToken = (userId, token) => {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   })
-    .then(res => {
+    .then((res) => {
       //console.log("RES", res);
       return res.json();
     })
-    .catch(err => console.log("ERROR??", err));
+    .catch((err) => console.log("ERROR??", err));
 };
 
 export const processPayment = (userId, token, paymentData) => {
@@ -101,15 +103,15 @@ export const processPayment = (userId, token, paymentData) => {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(paymentData)
+    body: JSON.stringify(paymentData),
   })
-    .then(res => {
+    .then((res) => {
       //console.log("RES", res);
       return res.json();
     })
-    .catch(err => console.log("ERROR", err));
+    .catch((err) => console.log("ERROR", err));
 };
 
 export const createOrder = (userId, token, createOrderData) => {
@@ -118,13 +120,13 @@ export const createOrder = (userId, token, createOrderData) => {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ order: createOrderData })
+    body: JSON.stringify({ order: createOrderData }),
   })
-    .then(res => {
+    .then((res) => {
       //console.log("RES", res);
       return res.json();
     })
-    .catch(err => console.log("ERROR", err));
+    .catch((err) => console.log("ERROR", err));
 };

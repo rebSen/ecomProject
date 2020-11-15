@@ -19,7 +19,7 @@ const Cart = () => {
   //   setItems(getCart());
   // }, [items]);
 
-  const showItems = items => {
+  const showItems = (items) => {
     return (
       <div>
         <h6> Votre panier contient {`${items.length}`} articles : </h6>

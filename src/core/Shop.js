@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
-import Card from "./Card";
+import CardMain from "./Card";
 import { getCategories, getFilteredProducts } from "./apiCore";
 import CheckBox from "./CheckBox";
 import RadioBox from "./RadioBox";
 import { prices } from "./fixedPrices";
 import "./shop.scss";
 import Button from "../styles/Buttons";
+import { Row, Col, Container } from "reactstrap";
 
 const Shop = () => {
   const [myFilters, setMyFilters] = useState({
-    filters: { category: [], price: [] }
+    filters: { category: [], price: [] },
   });
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState(false);
@@ -21,7 +22,7 @@ const Shop = () => {
 
   // load categories and set form data
   const init = () => {
-    getCategories().then(data => {
+    getCategories().then((data) => {
       if (data.error) {
         setError(data.error);
       } else {
@@ -30,8 +31,8 @@ const Shop = () => {
     });
   };
 
-  const loadFilteredResults = newFilters => {
-    getFilteredProducts(skip, limit, newFilters).then(data => {
+  const loadFilteredResults = (newFilters) => {
+    getFilteredProducts(skip, limit, newFilters).then((data) => {
       if (data.error) {
         setError(data.error);
       } else {
@@ -44,7 +45,7 @@ const Shop = () => {
 
   const loadMore = () => {
     let toSkip = skip + limit;
-    getFilteredProducts(toSkip, limit, myFilters.filters).then(data => {
+    getFilteredProducts(toSkip, limit, myFilters.filters).then((data) => {
       if (data.error) {
         setError(data.error);
       } else {
@@ -79,7 +80,7 @@ const Shop = () => {
     setMyFilters(newFilters);
   };
 
-  const handlePrice = value => {
+  const handlePrice = (value) => {
     const data = prices;
     let array = [];
 
@@ -93,13 +94,13 @@ const Shop = () => {
   return (
     <Layout title="La boutique" description="" className="container-fluid">
       <div className="container-fluid">
-        <div className="row">
-          <div className="col-sm-3 col-lg-2 offset-lg-1 shop-menu">
+        <Row>
+          <div className="col-sm-3 col-lg-2 shop-menu">
             <p>Filtrer par Collections </p>
             <ul>
               <CheckBox
                 categories={categories}
-                handleFilters={filters => handleFilters(filters, "category")}
+                handleFilters={(filters) => handleFilters(filters, "category")}
               />
             </ul>
             <br />
@@ -108,26 +109,38 @@ const Shop = () => {
               <div>
                 <RadioBox
                   prices={prices}
-                  handleFilters={filters => handleFilters(filters, "price")}
+                  handleFilters={(filters) => handleFilters(filters, "price")}
                 />
               </div>
             </div>
           </div>
 
-          <div className="col-sm-8 offset-1 offset-lg-0">
+          <div className="col-sm-7 col-md-10 col-lg-10">
             <div>
-              {filteredResults &&
-                filteredResults.map((product, i) => (
-                  <div key={i}>
-                    <Card product={product} />
-                  </div>
-                ))}
+              <Container>
+                <Row>
+                  {filteredResults &&
+                    filteredResults.map((product, i) => (
+                      // <div className="Row">
+                      // <div
+                      //   className="col-sm-3 offset-1 col-lg-5 shop-menu"
+                      //   style={{ display: "flex" }}
+                      // > md={4}>
+                      // <Col key={i} sm={10} md={6} lg={4}>
+                      <Col key={i} sm={10} md={6} lg={4}>
+                        <CardMain product={product} />
+                      </Col>
+                      // </div>
+                      // </div>
+                    ))}
+                </Row>
+                <Row>
+                  <div style={{ float: "right" }}>{loadMoreButton()}</div>
+                </Row>
+              </Container>
             </div>
-
-            <hr />
-            <div style={{ float: "right" }}>{loadMoreButton()}</div>
           </div>
-        </div>
+        </Row>
       </div>
     </Layout>
   );
